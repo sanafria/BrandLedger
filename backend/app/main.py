@@ -1,22 +1,40 @@
 """BrandLedger FastAPI Application Entry Point.
 
 Maintained as part of the shared API layer owned by Zoya, integrating
-CORS, configuration, shared schemas, and Zynab's scan_draft service.
+CORS, configuration, shared schemas, database pooling, Policy Card APIs,
+and Zynab's scan_draft service.
 """
 
+from contextlib import asynccontextmanager
 from typing import Any
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
+from backend.app.api.policies import router as policies_router
 from backend.app.config import settings
+from backend.app.db import db_manager
 from backend.app.schemas.finding import Finding
 from backend.app.services.policy_engine import scan_draft
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Lifecycle events: connect to database on startup, disconnect on shutdown."""
+    try:
+        await db_manager.connect()
+    except Exception:
+        # If DB is temporarily unavailable, allow API to start for health check
+        pass
+    yield
+    await db_manager.disconnect()
+
 
 app = FastAPI(
     title="BrandLedger API",
     description="Compliance, Rules Engine, and Policy Verification API",
     version="1.0.0",
+    lifespan=lifespan,
 )
 
 # Configure CORS for Next.js frontend (Sana and Nimra)
@@ -27,6 +45,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Register Policy Card router (Phase 3)
+app.include_router(policies_router, prefix="/api")
 
 
 class ScanDraftRequest(BaseModel):

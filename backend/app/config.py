@@ -24,7 +24,7 @@ class Settings(BaseSettings):
     SUPABASE_URL: str = ""
     SUPABASE_ANON_KEY: str = ""
     SUPABASE_SERVICE_ROLE_KEY: str = ""
-    DATABASE_URL: str = ""
+    DATABASE_URL: str = "postgresql://brandledger_user:brandledger_secret@localhost:5433/brandledger"
 
     # Optional AI Key (Zynab's engine integration)
     OPENAI_API_KEY: str = ""
