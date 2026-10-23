@@ -1,20 +1,31 @@
 """BrandLedger FastAPI Application Entry Point.
 
 Maintained as part of the shared API layer owned by Zoya, integrating
-Zynab's scan_draft service into the FastAPI scan workflow.
+CORS, configuration, shared schemas, and Zynab's scan_draft service.
 """
 
 from typing import Any
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
-from backend.app.services.policy_engine import scan_draft
+from backend.app.config import settings
 from backend.app.schemas.finding import Finding
+from backend.app.services.policy_engine import scan_draft
 
 app = FastAPI(
     title="BrandLedger API",
     description="Compliance, Rules Engine, and Policy Verification API",
     version="1.0.0",
+)
+
+# Configure CORS for Next.js frontend (Sana and Nimra)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.ALLOWED_ORIGINS,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
@@ -34,7 +45,7 @@ class ScanDraftResponse(BaseModel):
 @app.get("/health")
 def health_check() -> dict[str, str]:
     """Health check endpoint."""
-    return {"status": "healthy", "service": "brandledger-api"}
+    return {"status": "ok", "service": "brandledger-api"}
 
 
 @app.post("/api/scan", response_model=ScanDraftResponse)
