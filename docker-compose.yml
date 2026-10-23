@@ -1,0 +1,24 @@
+services:
+  brandledger_db:
+    image: postgres:16-alpine
+    container_name: brandledger_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: brandledger
+      POSTGRES_USER: brandledger_user
+      POSTGRES_PASSWORD: brandledger_secret
+    ports:
+      # Port 5433 mapped to container 5432 to avoid collision with other local databases
+      - "5433:5432"
+    volumes:
+      - brandledger_pgdata:/var/lib/postgresql/data
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
+      - ./database/seed.sql:/docker-entrypoint-initdb.d/02_seed.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U brandledger_user -d brandledger"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  brandledger_pgdata:

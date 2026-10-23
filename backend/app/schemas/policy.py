@@ -4,8 +4,11 @@ Supports robust extraction from various policy card representations
 produced by Zoya's database model and Mahadevi's extraction pipeline.
 """
 
-from typing import Any, Optional
-from pydantic import BaseModel, Field
+from datetime import date, datetime
+from enum import Enum
+from typing import Any, List, Optional
+from uuid import UUID
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class PolicyCard(BaseModel):
@@ -75,3 +78,75 @@ def normalize_policy_card(card_dict: dict[str, Any]) -> Optional[PolicyCard]:
         rules=rules,
         metadata=metadata,
     )
+
+
+# ==============================================================================
+# API Contract Schemas (Owned by Nimra in UI, Zoya in Database & API)
+# ==============================================================================
+
+class CardType(str, Enum):
+    """Supported Policy Card categories."""
+    TERMINOLOGY = "terminology"
+    OFFER = "offer"
+    CLAIM = "claim"
+    FACT = "fact"
+    TONE = "tone"
+
+
+class PolicyStatus(str, Enum):
+    """Status of a policy card."""
+    ACTIVE = "active"
+    INACTIVE = "inactive"
+
+
+class SeverityLevel(str, Enum):
+    """Finding severity level."""
+    BLOCKER = "blocker"
+    WARNING = "warning"
+    INFO = "info"
+
+
+class PolicyCardBase(BaseModel):
+    """Base fields for a BrandLedger Policy Card."""
+    title: str = Field(..., min_length=2, max_length=255, description="Short policy title")
+    card_type: CardType = Field(..., description="Category: terminology, offer, claim, fact, tone")
+    rule_text: str = Field(..., min_length=3, description="Rule description or requirement")
+    approved_value: Optional[str] = Field(None, description="Explicit approved text or value")
+    source_quote: str = Field(..., min_length=3, description="Exact cited quote from brand source document")
+    valid_from: Optional[date] = Field(None, description="Effective start date")
+    valid_until: Optional[date] = Field(None, description="Expiration date (critical for offers)")
+    severity: SeverityLevel = Field(default=SeverityLevel.BLOCKER, description="Default severity if violated")
+
+
+class PolicyCardCreate(PolicyCardBase):
+    """Payload to create a new policy card."""
+    pass
+
+
+class PolicyCardUpdate(BaseModel):
+    """Payload to update an existing policy card with version bump."""
+    title: Optional[str] = Field(None, min_length=2, max_length=255)
+    rule_text: Optional[str] = Field(None, min_length=3)
+    approved_value: Optional[str] = None
+    source_quote: Optional[str] = Field(None, min_length=3)
+    valid_from: Optional[date] = None
+    valid_until: Optional[date] = None
+    severity: Optional[SeverityLevel] = None
+    status: Optional[PolicyStatus] = None
+
+
+class PolicyCardResponse(PolicyCardBase):
+    """Policy Card representation returned by the API."""
+    id: UUID = Field(..., description="Unique policy card ID")
+    version: int = Field(default=1, description="Policy version number (immutable per version)")
+    status: PolicyStatus = Field(default=PolicyStatus.ACTIVE, description="Active or inactive")
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
+
+    model_config = ConfigDict(from_attributes=True)
+
+
+class PolicyListResponse(BaseModel):
+    """Envelope for listing policies."""
+    items: List[PolicyCardResponse] = Field(default_factory=list)
+    total: int = Field(default=0)
