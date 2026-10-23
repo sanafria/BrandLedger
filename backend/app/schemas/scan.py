@@ -44,6 +44,7 @@ class ScanCreate(BaseModel):
     title: str = Field(..., min_length=1, max_length=255)
     content_text: str = Field(..., min_length=1)
     draft_id: Optional[UUID] = Field(None, description="Optional existing draft ID for rescan")
+    scan_date: Optional[str] = Field(None, description="Optional explicit reference date YYYY-MM-DD")
 
 
 class ScanResponse(BaseModel):

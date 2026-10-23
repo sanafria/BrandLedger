@@ -12,6 +12,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
 from backend.app.api.policies import router as policies_router
+from backend.app.api.scans import router as scans_router
 from backend.app.config import settings
 from backend.app.db import db_manager
 from backend.app.schemas.finding import Finding
@@ -46,8 +47,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Register Policy Card router (Phase 3)
+# Register Routers
 app.include_router(policies_router, prefix="/api")
+app.include_router(scans_router, prefix="/api")
 
 
 class ScanDraftRequest(BaseModel):
