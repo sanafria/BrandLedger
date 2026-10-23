@@ -17,7 +17,7 @@ class ReviewCreate(BaseModel):
     draft_id: UUID = Field(..., description="UUID of draft being reviewed")
     scan_id: UUID = Field(..., description="UUID of completed scan evaluated")
     decision: ReviewDecision = Field(..., description="'approved' or 'rejected'")
-    comment: str = Field(..., min_length=2, description="Reviewer explanation or verification note")
+    comment: Optional[str] = Field(default="", description="Reviewer explanation or verification note")
 
 
 class ReviewResponse(BaseModel):

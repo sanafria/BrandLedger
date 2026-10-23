@@ -89,7 +89,7 @@ async def execute_scan(
     cleaned_content = content_text.strip()
     if not cleaned_content:
         raise HTTPException(
-            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
             detail="Draft content_text must not be empty.",
         )
 
