@@ -14,6 +14,7 @@ from fastapi.testclient import TestClient
 
 from backend.app.api import uploads
 from backend.app.schemas.scan import ScanResponse, ScanStatus
+from backend.extraction_module.brandledger_extraction.ocr_service import tesseract_available
 
 DATA = Path(__file__).resolve().parent.parent / "extraction_module" / "dataset"
 
@@ -41,6 +42,7 @@ def _post(client, rel_path, content_type):
         return client.post("/api/scans/upload", files={"file": (path.name, fh, content_type)})
 
 
+@pytest.mark.skipif(not tesseract_available(), reason="Tesseract OCR binary not installed on host system")
 def test_image_is_extracted_then_scanned(client_and_calls):
     client, calls = client_and_calls
     r = _post(client, "images/img_clear_offer.png", "image/png")
@@ -73,6 +75,7 @@ def test_bad_files_are_rejected_and_never_scanned(client_and_calls, rel_path, co
     assert calls == []          # a failed read must never reach the scanner
 
 
+@pytest.mark.skipif(not tesseract_available(), reason="Tesseract OCR binary not installed on host system")
 def test_blank_image_is_not_treated_as_clean(client_and_calls):
     client, calls = client_and_calls
     r = _post(client, "images/img_blank.png", "image/png")
