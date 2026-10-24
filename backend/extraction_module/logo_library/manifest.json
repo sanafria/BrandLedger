@@ -1,0 +1,26 @@
+{
+  "_note": "PLACEHOLDER logos for testing only. Replace with the team's real approved logos.",
+  "logos": [
+    {
+      "name": "placeholder_primary",
+      "file": "approved/placeholder_primary.png",
+      "status": "approved",
+      "placeholder": true,
+      "notes": "Synthetic navy hexagon + orange dot"
+    },
+    {
+      "name": "placeholder_mono",
+      "file": "approved/placeholder_mono.png",
+      "status": "approved",
+      "placeholder": true,
+      "notes": "Synthetic black/white variant"
+    },
+    {
+      "name": "placeholder_legacy_2019",
+      "file": "approved/placeholder_legacy.png",
+      "status": "deprecated",
+      "placeholder": true,
+      "notes": "Synthetic OLD logo - should be flagged as outdated"
+    }
+  ]
+}

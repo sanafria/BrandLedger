@@ -1,0 +1,115 @@
+.section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.titleGroup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.iconWrap {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconNum {
+  background: rgba(168, 85, 247, 0.15);
+  color: #a855f7;
+}
+
+.iconOffer {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+}
+
+.iconClaim {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+}
+
+.title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.link {
+  font-size: 0.8rem;
+  color: #38bdf8;
+  font-weight: 600;
+}
+.link:hover {
+  text-decoration: underline;
+}
+
+.desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.itemsList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.itemBox {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.85rem;
+}
+
+.itemHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.itemTitle {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.itemTag {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.itemQuote {
+  font-size: 0.8rem;
+  font-style: italic;
+  color: var(--text-muted);
+}
