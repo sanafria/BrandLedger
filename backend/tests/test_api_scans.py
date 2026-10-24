@@ -153,3 +153,17 @@ def test_7_get_nonexistent_scan_returns_404(client: TestClient) -> None:
     response = client.get(f"/api/scans/{fake_id}")
     assert response.status_code == 404
     assert f"'{fake_id}' not found" in response.json()["detail"]
+
+
+def test_8_scan_nonexistent_draft_id_returns_404(client: TestClient) -> None:
+    """Verify POST /api/scans with a nonexistent draft_id returns 404 Not Found without persisting records."""
+    fake_draft_id = str(uuid.uuid4())
+    payload = {
+        "title": "Nonexistent Draft Rescan",
+        "content_text": "Valid copy for scanning.",
+        "draft_id": fake_draft_id,
+    }
+
+    response = client.post("/api/scans", json=payload)
+    assert response.status_code == 404
+    assert f"Draft with ID '{fake_draft_id}' not found." in response.json()["detail"]
