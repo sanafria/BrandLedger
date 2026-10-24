@@ -17,7 +17,10 @@ import json
 import logging
 import os
 from typing import Any, Optional
+from dotenv import load_dotenv
 import httpx
+
+load_dotenv()
 
 from backend.app.schemas.finding import Finding, FindingCategory, FindingSeverity
 from backend.app.schemas.policy import PolicyCard

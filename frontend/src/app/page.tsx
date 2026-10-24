@@ -2,6 +2,10 @@
 
 import React from 'react';
 import Link from 'next/link';
+import {
+  Shield, Layers, BookOpen, Award, BarChart2,
+  History, ArrowRight, Sparkles, CheckCircle2, Lock
+} from 'lucide-react';
 import styles from './page.module.css';
 
 export default function HomePage() {
@@ -11,7 +15,7 @@ export default function HomePage() {
       <section className={styles.hero}>
         <div className={styles.pillBadge}>
           <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#38bdf8' }} />
-          <span>Member 2 Implementation • Policy Core</span>
+          <span>Future Stack Hackathon • Enterprise Brand Governance</span>
         </div>
 
         <h1 className={styles.title}>
@@ -19,62 +23,131 @@ export default function HomePage() {
         </h1>
 
         <p className={styles.subtitle}>
-          Brand Ledger eliminates compliance hallucinations before marketing copy is published. 
-          Every single finding is anchored in approved brand policies, active offers, and literal citations.
+          BrandLedger eliminates compliance hallucinations before marketing copy is published. 
+          Every single finding is anchored in approved brand policies, active offers, and verbatim citations.
         </p>
 
         <div className={styles.tenetCallout}>
           <div className={styles.tenetIcon}>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-              <polyline points="9 12 11 14 15 10" />
-            </svg>
+            <Shield size={24} color="#10b981" />
           </div>
           <div>
             <div className={styles.tenetTitle}>Core Platform Tenet: &ldquo;No receipt, no flag.&rdquo;</div>
             <div className={styles.tenetDesc}>
-              Our deterministic rules engine and evidence verifier will never report an issue without citing the exact policy card ID, approved version, and verbatim source quotation.
+              Our deterministic rules engine and AdaptionLabs AI Blueprint will never flag an issue without citing the exact policy card ID, active version snapshot, and a literal verbatim source quotation.
             </div>
           </div>
+        </div>
+
+        {/* Quick CTA to Workspace */}
+        <div style={{ display: 'flex', gap: 14, marginTop: 8 }}>
+          <Link
+            href="/workspace"
+            style={{
+              background: 'var(--gradient-brand)',
+              color: 'white',
+              padding: '14px 28px',
+              borderRadius: 8,
+              fontSize: '1rem',
+              fontWeight: 700,
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 8,
+              boxShadow: 'var(--shadow-glow)'
+            }}
+          >
+            <Layers size={18} />
+            <span>Open Scan Workspace</span>
+            <ArrowRight size={16} />
+          </Link>
+          <Link
+            href="/policies"
+            style={{
+              background: 'var(--bg-surface)',
+              border: '1px solid var(--border-light)',
+              color: 'var(--text-primary)',
+              padding: '14px 24px',
+              borderRadius: 8,
+              fontSize: '1rem',
+              fontWeight: 600,
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 8
+            }}
+          >
+            <BookOpen size={18} />
+            <span>Policy Library</span>
+          </Link>
         </div>
       </section>
 
       {/* Main Module Action Cards */}
       <section className={styles.modulesGrid}>
-        {/* Card 1: Policy Library */}
-        <Link href="/policies" className={styles.moduleCard}>
+        {/* Card 1: Scan Workspace */}
+        <Link href="/workspace" className={styles.moduleCard} style={{ borderColor: 'rgba(56, 189, 248, 0.4)' }}>
           <div className={styles.cardGlow} />
           <div className={styles.cardHeader}>
-            <div className={`${styles.cardIcon} ${styles.iconLibrary}`}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
-                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
-              </svg>
+            <div className={`${styles.cardIcon} ${styles.iconLibrary}`} style={{ background: 'rgba(56, 189, 248, 0.15)', color: '#38bdf8' }}>
+              <Layers size={24} />
             </div>
-            <span className={styles.cardTag}>Core Library</span>
+            <span className={styles.cardTag} style={{ color: '#38bdf8', borderColor: 'rgba(56, 189, 248, 0.3)' }}>
+              Member 1 • Core Scanner
+            </span>
           </div>
 
-          <h2 className={styles.cardTitle}>Policy Library</h2>
+          <h2 className={styles.cardTitle}>Scan Workspace</h2>
           <p className={styles.cardDesc}>
-            Search, filter, author, and inspect the approved brand policies that directly feed into Zynab&apos;s rules engine. Includes real-time verbatim quote verification.
+            Interactive draft scanner powered by Zynab&apos;s deterministic rules engine and AdaptionLabs AI Blueprint. Features live text evidence highlighting and 1-click auto-fixes.
           </p>
 
           <ul className={styles.featuresList}>
             <li className={styles.featureItem}>
               <span style={{ color: '#38bdf8' }}>✓</span>
-              <span>Prohibited terminology &amp; approved replacements</span>
+              <span>Pre-staged Snippet A (Violations) and Snippet B (Compliant)</span>
             </li>
             <li className={styles.featureItem}>
               <span style={{ color: '#38bdf8' }}>✓</span>
-              <span>Promotional validity windows &amp; expiration dates</span>
+              <span>AdaptionLabs AI Blueprint &amp; Hallucination Mitigation</span>
             </li>
             <li className={styles.featureItem}>
               <span style={{ color: '#38bdf8' }}>✓</span>
-              <span>Numerical limits, rewards caps, and standard pricing</span>
+              <span>Verbatim &ldquo;No receipt, no flag&rdquo; evidence citations</span>
+            </li>
+          </ul>
+
+          <div className={styles.btnCardAction}>
+            <span>Launch Scanner</span>
+            <span>&rarr;</span>
+          </div>
+        </Link>
+
+        {/* Card 2: Policy Library */}
+        <Link href="/policies" className={styles.moduleCard}>
+          <div className={styles.cardGlow} />
+          <div className={styles.cardHeader}>
+            <div className={`${styles.cardIcon} ${styles.iconLibrary}`}>
+              <BookOpen size={24} />
+            </div>
+            <span className={styles.cardTag}>Member 2 • Core Library</span>
+          </div>
+
+          <h2 className={styles.cardTitle}>Policy Library</h2>
+          <p className={styles.cardDesc}>
+            Authoritative brand rulebook with automated versioning. Search, filter, and author approved policy cards across terminology, offers, and factual metrics.
+          </p>
+
+          <ul className={styles.featuresList}>
+            <li className={styles.featureItem}>
+              <span style={{ color: '#38bdf8' }}>✓</span>
+              <span>Prohibited terms &amp; approved replacements</span>
             </li>
             <li className={styles.featureItem}>
               <span style={{ color: '#38bdf8' }}>✓</span>
-              <span>Policy versioning and audit traceability</span>
+              <span>Promotional validity calendars &amp; expiration dates</span>
+            </li>
+            <li className={styles.featureItem}>
+              <span style={{ color: '#38bdf8' }}>✓</span>
+              <span>Quote integrity checker (&ldquo;No receipt, no flag&rdquo;)</span>
             </li>
           </ul>
 
@@ -84,48 +157,78 @@ export default function HomePage() {
           </div>
         </Link>
 
-        {/* Card 2: Brand Passport */}
-        <Link href="/brand-passport" className={styles.moduleCard}>
+        {/* Card 3: Executive Insights */}
+        <Link href="/insights" className={styles.moduleCard}>
           <div className={styles.cardGlow} />
           <div className={styles.cardHeader}>
-            <div className={`${styles.cardIcon} ${styles.iconPassport}`}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <rect x="3" y="4" width="18" height="16" rx="3" />
-                <circle cx="9" cy="10" r="2" />
-                <path d="M15 8h2" />
-                <path d="M15 12h2" />
-                <path d="M7 16h10" />
-              </svg>
+            <div className={`${styles.cardIcon}`} style={{ background: 'rgba(168, 85, 247, 0.15)', color: '#c084fc' }}>
+              <BarChart2 size={24} />
             </div>
-            <span className={styles.cardTag}>Executive Overview</span>
+            <span className={styles.cardTag} style={{ color: '#c084fc', borderColor: 'rgba(168, 85, 247, 0.3)' }}>
+              Phase 2 • Analytics
+            </span>
           </div>
 
-          <h2 className={styles.cardTitle}>Brand Passport</h2>
+          <h2 className={styles.cardTitle}>Executive Insights</h2>
           <p className={styles.cardDesc}>
-            The certified single source of truth for brand identity. Consolidates voice pillars, numerical guardrails, claim substantiation standards, and visual assets with interactive deep-links.
+            Governance analytics tracking compliance score trends, violation category breakdowns, channel risk levels, and high-impact policy leaderboards.
           </p>
 
           <ul className={styles.featuresList}>
             <li className={styles.featureItem}>
-              <span style={{ color: '#a855f7' }}>✓</span>
-              <span>Governance certification score &amp; mission statement</span>
+              <span style={{ color: '#c084fc' }}>✓</span>
+              <span>94.2% overall compliance score &amp; MoM improvements</span>
             </li>
             <li className={styles.featureItem}>
-              <span style={{ color: '#a855f7' }}>✓</span>
-              <span>Brand voice pillars with explicit Dos and Don&apos;ts</span>
+              <span style={{ color: '#c084fc' }}>✓</span>
+              <span>Category breakdown: Terminology, Offers, Claims</span>
             </li>
             <li className={styles.featureItem}>
-              <span style={{ color: '#a855f7' }}>✓</span>
-              <span>Approved dictionary comparison table</span>
-            </li>
-            <li className={styles.featureItem}>
-              <span style={{ color: '#a855f7' }}>✓</span>
-              <span>One-click Brand Passport JSON export</span>
+              <span style={{ color: '#c084fc' }}>✓</span>
+              <span>Channel assessment: Social, Web Banners, Newsletters</span>
             </li>
           </ul>
 
           <div className={styles.btnCardAction}>
-            <span>View Brand Passport</span>
+            <span>View Executive Insights</span>
+            <span>&rarr;</span>
+          </div>
+        </Link>
+
+        {/* Card 4: Cryptographic Audit Trail */}
+        <Link href="/audit" className={styles.moduleCard}>
+          <div className={styles.cardGlow} />
+          <div className={styles.cardHeader}>
+            <div className={`${styles.cardIcon}`} style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#34d399' }}>
+              <History size={24} />
+            </div>
+            <span className={styles.cardTag} style={{ color: '#34d399', borderColor: 'rgba(16, 185, 129, 0.3)' }}>
+              Phase 2 • Cryptographic Audit
+            </span>
+          </div>
+
+          <h2 className={styles.cardTitle}>Audit Ledger</h2>
+          <p className={styles.cardDesc}>
+            Chronological, immutable audit trail recording every scan evaluation, policy version increment, reviewer decision, and SHA-256 fingerprint.
+          </p>
+
+          <ul className={styles.featuresList}>
+            <li className={styles.featureItem}>
+              <span style={{ color: '#34d399' }}>✓</span>
+              <span>Real-time SHA-256 tamper verification check</span>
+            </li>
+            <li className={styles.featureItem}>
+              <span style={{ color: '#34d399' }}>✓</span>
+              <span>Filter by actor, action type, and target draft ID</span>
+            </li>
+            <li className={styles.featureItem}>
+              <span style={{ color: '#34d399' }}>✓</span>
+              <span>Provable mathematical auditability for enterprise compliance</span>
+            </li>
+          </ul>
+
+          <div className={styles.btnCardAction}>
+            <span>Open Audit Ledger</span>
             <span>&rarr;</span>
           </div>
         </Link>
@@ -133,42 +236,42 @@ export default function HomePage() {
 
       {/* Team Architecture Matrix */}
       <section className={styles.teamSection}>
-        <h2 className={styles.teamTitle}>Brand Ledger Six-Member Team Architecture</h2>
+        <h2 className={styles.teamTitle}>BrandLedger Six-Member Team Architecture</h2>
         <div className={styles.teamGrid}>
-          <div className={styles.memberCard}>
-            <span className={styles.memberRole}>Member 1 • Sana</span>
-            <span className={styles.memberName}>Scan Workspace</span>
-            <span className={styles.memberDesc}>Interactive draft submission, real-time finding highlights &amp; reviewer workflow.</span>
-          </div>
-
           <div className={styles.memberCard} style={{ borderColor: 'rgba(56, 189, 248, 0.4)', background: 'rgba(56, 189, 248, 0.05)' }}>
-            <span className={styles.memberRole} style={{ color: '#38bdf8' }}>Member 2 • Nimra (You)</span>
-            <span className={styles.memberName} style={{ color: '#38bdf8' }}>Policy Library &amp; Brand Passport</span>
-            <span className={styles.memberDesc}>Authoritative brand policy management, versioning, and governance passport.</span>
+            <span className={styles.memberRole} style={{ color: '#38bdf8' }}>Member 1 • Sana Fria</span>
+            <span className={styles.memberName} style={{ color: '#38bdf8' }}>Scan Workspace &amp; Frontend</span>
+            <span className={styles.memberDesc}>Interactive draft submission, real-time finding highlights &amp; reviewer workflow (/workspace).</span>
           </div>
 
           <div className={styles.memberCard}>
-            <span className={styles.memberRole}>Member 3 • Zoya</span>
+            <span className={styles.memberRole}>Member 2 • Nimra Tariq</span>
+            <span className={styles.memberName}>Policy Library &amp; Brand Passport</span>
+            <span className={styles.memberDesc}>Authoritative brand policy management, versioning, and governance passport (/policies, /brand-passport).</span>
+          </div>
+
+          <div className={styles.memberCard}>
+            <span className={styles.memberRole}>Member 3 • Zoya Nadeem</span>
             <span className={styles.memberName}>Database &amp; Shared API</span>
-            <span className={styles.memberDesc}>PostgreSQL schema, persistence repository, and core FastAPI routing.</span>
+            <span className={styles.memberDesc}>PostgreSQL schema, persistence repository, and core FastAPI review orchestration.</span>
           </div>
 
           <div className={styles.memberCard} style={{ borderColor: 'rgba(16, 185, 129, 0.3)' }}>
-            <span className={styles.memberRole} style={{ color: '#10b981' }}>Member 4 • Zynab</span>
+            <span className={styles.memberRole} style={{ color: '#10b981' }}>Member 4 • Zynab Farhan</span>
             <span className={styles.memberName}>Rules Engine &amp; Evidence</span>
-            <span className={styles.memberDesc}>Implemented in commit 6f3b261 (4 deterministic rules, AI analysis, quote verification).</span>
+            <span className={styles.memberDesc}>Deterministic rules (terminology, expired offers, facts, claims) and &ldquo;No receipt, no flag&rdquo; verifier.</span>
           </div>
 
           <div className={styles.memberCard}>
-            <span className={styles.memberRole}>Member 5 • Mahadevi</span>
-            <span className={styles.memberName}>Document Ingestion</span>
-            <span className={styles.memberDesc}>PDF parsing and automated policy card extraction pipeline.</span>
+            <span className={styles.memberRole}>Member 5 • Mahadevi Sabarad</span>
+            <span className={styles.memberName}>Document &amp; OCR Ingestion</span>
+            <span className={styles.memberDesc}>PyMuPDF vector text extraction, Tesseract OCR, and visual quality flags.</span>
           </div>
 
           <div className={styles.memberCard}>
-            <span className={styles.memberRole}>Member 6</span>
-            <span className={styles.memberName}>Multi-Agent Orchestration</span>
-            <span className={styles.memberDesc}>Cross-system coordination, audit logging, and team deployment integration.</span>
+            <span className={styles.memberRole}>Member 6 • Umme Haany Tandur</span>
+            <span className={styles.memberName}>QA, Testing &amp; Submission</span>
+            <span className={styles.memberDesc}>Acceptance test suite, demo script &amp; verification checklist (docs/demo-script.md).</span>
           </div>
         </div>
       </section>

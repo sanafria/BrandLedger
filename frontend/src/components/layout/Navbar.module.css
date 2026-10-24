@@ -64,19 +64,21 @@
 .navLinks {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
+  overflow-x: auto;
 }
 
 .navLink {
-  padding: 8px 14px;
+  padding: 6px 10px;
   border-radius: var(--radius-md);
-  font-size: 0.9rem;
+  font-size: 0.82rem;
   font-weight: 500;
   color: var(--text-secondary);
   transition: all 0.2s ease;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
+  white-space: nowrap;
 }
 
 .navLink:hover {
