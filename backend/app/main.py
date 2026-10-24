@@ -15,6 +15,7 @@ from backend.app.api.passports import router as passports_router
 from backend.app.api.policies import router as policies_router
 from backend.app.api.reviews import router as reviews_router
 from backend.app.api.scans import router as scans_router
+from backend.app.api.uploads import router as uploads_router
 from backend.app.config import settings
 from backend.app.db import db_manager
 from backend.app.schemas.finding import Finding
@@ -52,6 +53,7 @@ app.add_middleware(
 # Register Routers
 app.include_router(policies_router, prefix="/api")
 app.include_router(scans_router, prefix="/api")
+app.include_router(uploads_router, prefix="/api")
 app.include_router(reviews_router, prefix="/api")
 app.include_router(passports_router, prefix="/api")
 
